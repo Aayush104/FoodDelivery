@@ -63,3 +63,47 @@ exports.registerUser = async (req, res) => {
     return res.status(500).json({ message: "An error occurred while registering the user." });
   }
 };
+
+
+exports.loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  console.log("bbbb", req.body)
+
+  // Basic validation
+  if (!email || !password) {
+    return res.status(400).send("Email and password are required.");
+  }
+
+  try {
+    // Check if the email exists
+    const user = await users.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).send("User with that email does not exist.");
+    }
+
+    // Verify password
+    const isPasswordMatched = bcrypt.compareSync(password, user.password);
+    if (!isPasswordMatched) {
+      return res.status(401).send("Invalid password.");
+    }
+
+    // Include role in the JWT token
+    const token = jwt.sign(
+      { id: user.id, role: user.role }, // Adding role to the payload
+      process.env.SECRETKEY,
+      { expiresIn: "30d" }
+    );
+
+    // Send the token and user role
+    res.json({
+      message: "Login successful",
+      token,
+      role: user.role
+    });
+
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("An error occurred during login.");
+  }
+};
