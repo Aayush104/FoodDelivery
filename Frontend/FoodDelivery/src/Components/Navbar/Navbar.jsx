@@ -22,10 +22,21 @@ const Navbar = () => {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="/" className="text-gray-700 hover:text-amber-500 px-3 py-2 font-medium">Home</a>
+            <NavLink to= "/AboutUs">
             <a href="#" className="text-gray-700 hover:text-amber-500 px-3 py-2 font-medium">About Us</a>
-            <a href="#" className="text-gray-700 hover:text-amber-500 px-3 py-2 font-medium">Restaurants</a>
+            </NavLink>
+           
+
+           <NavLink to = '/Menu'>
+            <a href="#" className="text-gray-700 hover:text-amber-500 px-3 py-2 font-medium">Menu</a>
+            </NavLink>
+            
+            <NavLink to = "/FAQ" >
             <a href="#" className="text-gray-700 hover:text-amber-500 px-3 py-2 font-medium">FAQ</a>
+            </NavLink>
+            <NavLink to = "/Contact" >
             <a href="#" className="text-gray-700 hover:text-amber-500 px-3 py-2 font-medium">Contacts</a>
+            </NavLink>
           </div>
           
           {/* Right side buttons */}
