@@ -8,6 +8,8 @@ import Aboutus from './Pages/Aboutus';
 import Contact from './Pages/Contact';
 import FAQSection from './Pages/FAQSection';
 import Menu from './Pages/Menu';
+import Admin from './Pages/Admin';
+import Success from './Components/Success';
 
 const App = () => {
   return (
@@ -20,6 +22,9 @@ const App = () => {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/FAQ" element={<FAQSection />} />
         <Route path="/Menu" element={<Menu />} />
+        <Route path="/AdminDash" element={<Admin />} />
+        <Route path="/success" element={<Success />} />
+      
       </Routes>
     </Router>
   );

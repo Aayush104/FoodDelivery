@@ -4,6 +4,7 @@ import Footer from '../Components/Footer/Footer'
 import About from '../assets/About.png'
 
 const Contact = () => {
+  localStorage.removeItem("cartItems")
   return (
     <div className="bg-gray-50">
       <Navbar />

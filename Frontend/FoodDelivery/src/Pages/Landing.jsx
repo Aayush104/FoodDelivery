@@ -6,6 +6,8 @@ import HowItWorks from '../Components/HowItWorks/HowItWorks'
 import TestiMonial from '../Components/TestiMonial/TestiMonial'
 
 const Landing = () => {
+
+  localStorage.removeItem("cartItems")
   return (
     <div>
       <Navbar />

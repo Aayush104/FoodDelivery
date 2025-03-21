@@ -29,7 +29,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require("./userModel")(sequelize, DataTypes);
+db.menus = require("./menuModel")(sequelize, DataTypes);
+db.orders = require("./orderModel")(sequelize, DataTypes);
 
+  //relationship between two tables
+  db.users.hasMany(db.orders)
+  db.menus.belongsTo(db.users)
 
 
 // Sync and seed admin

@@ -6,6 +6,7 @@ import Footer from '../Components/Footer/Footer';
 const FAQSection = () => {
   // State to track which FAQ item is open
   const [activeIndex, setActiveIndex] = useState(null);
+  localStorage.removeItem("cartItems")
 
   // FAQ data organized by categories
   const faqData = [
@@ -150,7 +151,7 @@ const FAQSection = () => {
         >
           QUICK EAT FAQ
         </motion.h1>
-
+          
         <motion.div
           variants={containerVariants}
           initial="hidden"

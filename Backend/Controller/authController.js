@@ -89,7 +89,7 @@ exports.loginUser = async (req, res) => {
 
     // Include role in the JWT token
     const token = jwt.sign(
-      { id: user.id, role: user.role }, // Adding role to the payload
+      { id: user.id, role: user.role, location:user.location }, // Adding role to the payload
       process.env.SECRETKEY,
       { expiresIn: "30d" }
     );

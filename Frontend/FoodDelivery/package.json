@@ -13,10 +13,12 @@
     "@tailwindcss/vite": "^4.0.12",
     "axios": "^1.8.2",
     "framer-motion": "^12.4.10",
+    "lucide-react": "^0.483.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",
     "react-toastify": "^11.0.5",
+    "recharts": "^2.15.1",
     "swiper": "^11.2.5"
   },
   "devDependencies": {

@@ -3,12 +3,15 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
+  localStorage.removeItem("cartItems");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,15 +23,28 @@ const Login = () => {
       });
 
       if (response.data.message === "Login successful") {
+        toast.success("Login successful!");
+        
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.role);
-        navigate("/home");
+        
+        if(response.data.role === "Admin") {
+          toast.info("Redirecting to Admin Dashboard...");
+          navigate("/AdminDash");
+          return;
+        }
+
+        if(response.data.role === "User") {
+      
+          navigate("/"); // Assuming you want to navigate to home page for regular users
+          return;
+        }
       } else {
-        alert("Invalid credentials. Please try again.");
+        toast.error("Invalid credentials. Please try again.");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 

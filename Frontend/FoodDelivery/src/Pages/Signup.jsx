@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 import Footer from "../Components/Footer/Footer";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,12 +14,46 @@ const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [location, setLocation] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const navigate = useNavigate();
+
+  localStorage.removeItem("cartItems");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Form validation
+    if (!fullName.trim()) {
+      toast.error("Please enter your full name");
+      return;
+    }
+
+    if (!email.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match!");
+      return;
+    }
+
+    if (!phoneNumber.trim()) {
+      toast.error("Please enter your phone number");
+      return;
+    }
+
+    if (!location.trim()) {
+      toast.error("Please enter your location");
+      return;
+    }
+
+    if (!agreeTerms) {
+      toast.error("You must agree to Terms of Service and Privacy Policy");
       return;
     }
 
@@ -34,23 +68,25 @@ const Signup = () => {
       });
 
       if (response.status === 201 || response.status === 200) {
-        toast.success("Signup successful! Redirecting...");
+        toast.success("Signup successful! Redirecting to login...");
         setTimeout(() => {
-          window.location.href = "/login";
+          navigate("/login");
         }, 2000);
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "Signup failed! Try again.");
+      console.error("Registration failed:", err);
+      toast.error(err.response?.data?.message || "Signup failed! Please try again.");
     }
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-orange-50">
       <Navbar />
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      
       <div className="flex-grow flex items-center justify-center px-4 py-12">
         <div className="bg-white rounded-lg shadow-xl overflow-hidden max-w-xl w-full">
-          <div className="bg-orange-500 px-6 text-center flex gap-18 items-center py-3">
+          <div className="bg-orange-500 px-6 text-center flex justify-between items-center py-3">
             <div className="flex gap-3">
               <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl">Q</div>
               <h1 className="text-3xl font-bold text-white">QuickEat</h1>

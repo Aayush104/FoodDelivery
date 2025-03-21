@@ -6,6 +6,8 @@ import TestiMonial from '../Components/TestiMonial/TestiMonial';
 
 // Main App Component
 const Aboutus = () => {
+
+  localStorage.removeItem("cartItems")
   return (
     <div className="font-sans">
     <Navbar />
